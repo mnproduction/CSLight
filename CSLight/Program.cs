@@ -10,14 +10,17 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            // Console
+            // Increment and Decrement
 
-            string name = Console.ReadLine();
-            Console.WriteLine($"Hello {name}");
+            int a = 0;
+            
+            Console.WriteLine(a++); // postfix
+            Console.WriteLine(a);
+            Console.WriteLine(++a); // prefix
 
 
 
-            Console.WriteLine();
+
             Console.ReadKey();
 
 
