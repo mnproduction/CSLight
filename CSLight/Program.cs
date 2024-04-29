@@ -10,32 +10,32 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            // Types
-            // Integer
-            byte b; // 0 to 255
-            sbyte sb; // -128 to 127
-            short s; // -32768 to 32767
-            ushort us; // 0 to 65535
-            int i; // -2147483648 to 2147483647
-            uint ui; // 0 to 4294967295
-            long l; // -9223372036854775808 to 92233
-            ulong ul; // 0 to 18446744073709551615
-            // Floating point
-            float f; // 32 bit IEEE 754 floating point = 1.0f
-            double d; // 64 bit IEEE 754 floating point = 1.0d
-            decimal de; // 128 bit IEEE 754 floating point = 1.0m
-            // Character
-            char c; // 16 bit Unicode character 'a', 'A', '1', '!', 'ö', 'Ж'
-            // String
-            string str; // UTF-16 encoded string "Hello World"
-            // Boolean
-            bool bl; // true or false
-            // Null
-            object o; // null
+            // Math operations
+            int timeInMinutes = 130;
+            int hour;
+            int minute;
 
-            int age = 25;
+            hour = timeInMinutes / 60;
+            minute = timeInMinutes % 60;
 
-            age = 26;
+            int age = 10;
+            age++;
+            Console.WriteLine("Age is {0}", age);
+
+            age += 1;
+            Console.WriteLine("Age is {0}", age);
+
+            age--;
+            Console.WriteLine("Age is {0}", age);
+
+            age -= 1;
+            Console.WriteLine("Age is {0}", age);
+
+            Console.WriteLine("{0} minutes is {1} hours and {2} minutes", timeInMinutes, hour, minute);
+            Console.ReadKey();
+
+
+
 
         }
     }
