@@ -10,28 +10,43 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            // Math operations
-            int timeInMinutes = 130;
-            int hour;
-            int minute;
+            // Strings
 
-            hour = timeInMinutes / 60;
-            minute = timeInMinutes % 60;
+            // Concat
 
-            int age = 10;
-            age++;
-            Console.WriteLine("Age is {0}", age);
+            Console.WriteLine("Hello" + " " + "World");
 
-            age += 1;
-            Console.WriteLine("Age is {0}", age);
+            // Interpolation
 
-            age--;
-            Console.WriteLine("Age is {0}", age);
+            Console.WriteLine($"Hello {1 + 1} World");
 
-            age -= 1;
-            Console.WriteLine("Age is {0}", age);
+            // Conversions
 
-            Console.WriteLine("{0} minutes is {1} hours and {2} minutes", timeInMinutes, hour, minute);
+            int age;
+            
+            string ageAsString = "25";
+
+            age = Convert.ToInt32(ageAsString);
+            Console.WriteLine(Convert.ToChar(age));
+
+            
+            Console.WriteLine(Convert.ToDouble(ageAsString));
+            
+
+            Console.WriteLine(Convert.ToByte(age));
+
+
+            Console.WriteLine(Convert.ToDecimal(age));
+
+
+            Console.WriteLine(Convert.ToBoolean(age));
+
+
+            Console.WriteLine();
+
+
+
+            Console.WriteLine();
             Console.ReadKey();
 
 
