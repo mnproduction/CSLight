@@ -10,46 +10,36 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            //While
+            //Guess a number from 1 to 100
 
             Random random = new Random();
+            int value;
+            int triesCount = 5;
+            int userInput;
+            
+            value = random.Next(1, 101);
+            Console.Write("Guess the number from 1 to 100: ");
 
-            int playerHealth = 1000;
-
-            int enemyHealth = 500;
-
-
-            while (playerHealth > 0 && enemyHealth > 0)
+            while (triesCount-- > 0)
             {
-                int playerDamage = random.Next(10, 20);
-                int enemyDamage = random.Next(5, 50);
-                playerHealth -= enemyDamage;
-                enemyHealth -= playerDamage;
+                userInput = Convert.ToInt32(Console.ReadLine());
+                if (userInput == value && triesCount > 0)
+                {
+                    Console.WriteLine("You guessed the right number!");
+                    break;
+                }
+                else if (userInput > value)
+                {
+                    Console.WriteLine("Your guess is too high!");
+                }
+                else if (userInput < value)
+                {
+                    Console.WriteLine("Your guess is too low!");
+                }
+                else { Console.WriteLine("Invalid input!"); }
 
-                Console.WriteLine($"Player hits {playerDamage} damage to enemy.");
-                Console.WriteLine($"Enemy Health: {enemyHealth}");
-
-                Console.WriteLine($"Enemy hits {enemyDamage} damage to player.");
-                Console.WriteLine($"Player Health: {playerHealth}");
-                
-
+                if (triesCount == 0) { Console.WriteLine($"You've run out of tries! The number was {value}"); break; }
             }
-            if (playerHealth <= 0 && enemyHealth <= 0)
-            {
-                Console.WriteLine("Draw");
-            }
-            else if (enemyHealth <= 0)
-            {
-                Console.WriteLine("Player Wins");
-            }
-            else if (playerHealth <= 0)
-            {
-                Console.WriteLine("Enemy Wins");
-            }      
-
-          
-
-
 
 
             Console.ReadKey();
