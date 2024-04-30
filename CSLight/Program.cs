@@ -10,87 +10,112 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            // Functions
+            // Collections
 
+            // List
 
-            //Console.WriteLine($"Hi!");
-            //Console.WriteLine("How are you?");
-            //Console.WriteLine("I'm fine, thank you!");
-            //WriteError(message: "Now I'm going to write an error!", ConsoleColor.Green);
-            //WriteError();
-            //Console.WriteLine("Goodbye!");
-            //WriteError(message:Convert.ToString(Sum(400, 3)) + " is the sum of two numbers.", color: ConsoleColor.Yellow);
+            
 
+            List<int> numbers = new List<int>();
 
-            // DrawBar
-            int health = 20, maxHealth = 20;
-            int mana = 20, maxMana = 20;
+            numbers.Add(1);
+            numbers.Add(22);
+            numbers.Add(13);
+            numbers.Add(8);
+            numbers.Add(10);
 
-            while (true)
+            numbers.AddRange(new int[] { 11, 12, 14, 15, 22, 15, 122, 453 });
+
+            numbers.Insert(2, 2300);
+
+            numbers.Remove(10);
+            numbers.RemoveAt(6);
+            numbers.Insert(1, 100);
+
+            //numbers.RemoveAll(x => x > 12);
+            numbers.RemoveRange(3, 2);
+
+            for (int i = 0; i < numbers.Count; i++)
             {
-                DrawBar(health, maxHealth, ConsoleColor.Red, 0, 0, '|');
-                DrawBar(mana, maxMana, ConsoleColor.Blue, 25, 0, '|');
-                Console.SetCursorPosition(0, 1);
-                Console.WriteLine($"Health: {health}/{maxHealth}");
-                Console.SetCursorPosition(25, 1);
-                Console.WriteLine($"Mana: {mana}/{maxMana}");
+                Console.WriteLine(numbers[i]);
+            }
 
-                Console.SetCursorPosition(0, 5);
-                Console.Write("Change health by: ");
-                health += Convert.ToInt32(Console.ReadLine());
-                //Console.SetCursorPosition(0, 6);
-                Console.Write("Change mana by: ");
-                mana += Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine($"Count: {numbers.Count}. Value \"2300\" is {numbers.IndexOf(2300)}\n\n\n");
+
+            numbers.Clear();
+
+            // Queue - first in first out
+
+            Queue<string> patiens = new Queue<string>();
+
+            patiens.Enqueue("Amber");
+            patiens.Enqueue("Bob");
+            patiens.Enqueue("Chloe");
+            patiens.Enqueue("David");
+            patiens.Enqueue("Eve");
+            patiens.Enqueue("Frank");
+            patiens.Enqueue("Gary");
+
+            Console.WriteLine($"Now its turn of {patiens.Dequeue()}");
+
+            foreach (var patient in patiens)
+            {
+                Console.WriteLine(patient);
+            
+            }
+            Console.WriteLine($"Next is {patiens.Peek()}\n\n\n");
+
+            // Stack - last in first out
+
+            Stack<int> nums = new Stack<int>();
+
+            nums.Push(1);
+            nums.Push(2);
+            nums.Push(3);
+            nums.Push(4);
+            nums.Push(5);
+
+
+            //nums.Pop();
+
+            while (nums.Count > 0)
+            {
+                Console.WriteLine($"First out is {nums.Pop()}");
+            }
+
+            Console.WriteLine("\n\n");
+
+
+            // Dictionary
+
+            Dictionary<string, string> countriesCapitals = new Dictionary<string, string>();
+
+            countriesCapitals.Add("Poland", "Warsaw");
+            countriesCapitals.Add("Germany", "Berlin");
+            countriesCapitals.Add("France", "Paris");
+            countriesCapitals.Add("Spain", "Madrid");
+            countriesCapitals.Add("Italy", "Rome");
+
+            countriesCapitals.Remove("France");
+
+            if (countriesCapitals.ContainsKey("Poland"))
+            
+                Console.WriteLine(countriesCapitals["Poland"]);
+
+
+            foreach (var item in countriesCapitals)
+            {
+                Console.WriteLine($"Country: {item.Key}, Capital: {item.Value}"); 
+
                 
-                
-                Console.ReadKey();
-                Console.Clear();
             }
-
-
-
-        }
-
-        static void WriteError(string message = "Error!", ConsoleColor color = ConsoleColor.Red)
-        {
-            ConsoleColor defaultColor = Console.ForegroundColor;
-            Console.ForegroundColor = color;
-            Console.WriteLine(message);
-            Console.ForegroundColor = defaultColor;
+            
+            Console.ReadKey();
 
 
         }
 
-        static int Sum(int a, int b)
-        { return a + b; }
-
-        static void DrawBar(int value, int maxValue, ConsoleColor color, int posX, int posY, char symbol = '_')
-        {
         
-            ConsoleColor defaultColor = Console.BackgroundColor;
-            string bar = "";
-
-            for (int i = 0; i < value; i++)
-            {
-                bar += symbol;
-            }
-        
-            Console.SetCursorPosition(posX, posY);
-            Console.Write("[");
-            Console.BackgroundColor = color;
-            Console.Write(bar);
-            Console.BackgroundColor = defaultColor;
-
-            bar = "";
-
-            for (int i = value; i < maxValue; i++)
-            {
-                bar += symbol;
-            }
-
-            Console.Write(bar + "]");
-
-        }
 
 
     }
