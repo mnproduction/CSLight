@@ -10,40 +10,28 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            //Switch
+            //While
 
-            string dayOfWeak;
-
-            Console.Write("Enter the day of the week: ");
-            dayOfWeak = Console.ReadLine();
-
-
-            switch (dayOfWeak.ToLower())
+            int age;
+            
+            Console.Write("Enter your age: ");
+            age = Convert.ToInt32(Console.ReadLine());
+            int forAge = age;
+            while (age-- > 0)
             {
-                case "monday":
-                    Console.WriteLine("It's Monday"); break;
-                case "tuesday":
-                    Console.WriteLine("It's Tuesday"); break;
-                case "wednesday":
-                    Console.WriteLine("It's Wednesday"); break;
-                case "thursday":
-                    Console.WriteLine("It's Thursday"); break;
-                case "friday":
-                    Console.WriteLine("It's Friday"); break;
-                case "saturday":
-                case "sunday":
-                    Console.WriteLine("It's Weekend!!!"); break;
-                default:
-                    Console.WriteLine("Invalid day of the week"); break;
+                if (age == 5) { continue; }
+                Console.WriteLine($"Age is {age}");
+
             }
 
+            // For
 
+            for (int i = 0; i <= forAge; ++i)
+            {
+                Console.WriteLine($"Age is {i}");
+            }
 
-
-
-
-
-
+          
 
 
 
