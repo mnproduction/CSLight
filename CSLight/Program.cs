@@ -12,24 +12,40 @@ namespace CSLight
         {
             //While
 
-            int age;
-            
-            Console.Write("Enter your age: ");
-            age = Convert.ToInt32(Console.ReadLine());
-            int forAge = age;
-            while (age-- > 0)
+            Random random = new Random();
+
+            int playerHealth = 1000;
+
+            int enemyHealth = 500;
+
+
+            while (playerHealth > 0 && enemyHealth > 0)
             {
-                if (age == 5) { continue; }
-                Console.WriteLine($"Age is {age}");
+                int playerDamage = random.Next(10, 20);
+                int enemyDamage = random.Next(5, 50);
+                playerHealth -= enemyDamage;
+                enemyHealth -= playerDamage;
+
+                Console.WriteLine($"Player hits {playerDamage} damage to enemy.");
+                Console.WriteLine($"Enemy Health: {enemyHealth}");
+
+                Console.WriteLine($"Enemy hits {enemyDamage} damage to player.");
+                Console.WriteLine($"Player Health: {playerHealth}");
+                
 
             }
-
-            // For
-
-            for (int i = 0; i <= forAge; ++i)
+            if (playerHealth <= 0 && enemyHealth <= 0)
             {
-                Console.WriteLine($"Age is {i}");
+                Console.WriteLine("Draw");
             }
+            else if (enemyHealth <= 0)
+            {
+                Console.WriteLine("Player Wins");
+            }
+            else if (playerHealth <= 0)
+            {
+                Console.WriteLine("Enemy Wins");
+            }      
 
           
 
