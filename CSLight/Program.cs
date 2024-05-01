@@ -10,106 +10,17 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            // Collections
-
-            // List
-
             
+            Car ferrary = new Car("F40", 30, 471, 317.0f);
 
-            List<int> numbers = new List<int>();
+            Car mazda = new Car();
 
-            numbers.Add(1);
-            numbers.Add(22);
-            numbers.Add(13);
-            numbers.Add(8);
-            numbers.Add(10);
-
-            numbers.AddRange(new int[] { 11, 12, 14, 15, 22, 15, 122, 453 });
-
-            numbers.Insert(2, 2300);
-
-            numbers.Remove(10);
-            numbers.RemoveAt(6);
-            numbers.Insert(1, 100);
-
-            //numbers.RemoveAll(x => x > 12);
-            numbers.RemoveRange(3, 2);
-
-            for (int i = 0; i < numbers.Count; i++)
-            {
-                Console.WriteLine(numbers[i]);
-            }
-
-            Console.WriteLine($"Count: {numbers.Count}. Value \"2300\" is {numbers.IndexOf(2300)}\n\n\n");
-
-            numbers.Clear();
-
-            // Queue - first in first out
-
-            Queue<string> patiens = new Queue<string>();
-
-            patiens.Enqueue("Amber");
-            patiens.Enqueue("Bob");
-            patiens.Enqueue("Chloe");
-            patiens.Enqueue("David");
-            patiens.Enqueue("Eve");
-            patiens.Enqueue("Frank");
-            patiens.Enqueue("Gary");
-
-            Console.WriteLine($"Now its turn of {patiens.Dequeue()}");
-
-            foreach (var patient in patiens)
-            {
-                Console.WriteLine(patient);
-            
-            }
-            Console.WriteLine($"Next is {patiens.Peek()}\n\n\n");
-
-            // Stack - last in first out
-
-            Stack<int> nums = new Stack<int>();
-
-            nums.Push(1);
-            nums.Push(2);
-            nums.Push(3);
-            nums.Push(4);
-            nums.Push(5);
+            ferrary.ShowPassport();
+            ferrary.BecomeOlder(1, 10);
+            ferrary.ShowPassport();
 
 
-            //nums.Pop();
-
-            while (nums.Count > 0)
-            {
-                Console.WriteLine($"First out is {nums.Pop()}");
-            }
-
-            Console.WriteLine("\n\n");
-
-
-            // Dictionary
-
-            Dictionary<string, string> countriesCapitals = new Dictionary<string, string>();
-
-            countriesCapitals.Add("Poland", "Warsaw");
-            countriesCapitals.Add("Germany", "Berlin");
-            countriesCapitals.Add("France", "Paris");
-            countriesCapitals.Add("Spain", "Madrid");
-            countriesCapitals.Add("Italy", "Rome");
-
-            countriesCapitals.Remove("France");
-
-            if (countriesCapitals.ContainsKey("Poland"))
-            
-                Console.WriteLine(countriesCapitals["Poland"]);
-
-
-            foreach (var item in countriesCapitals)
-            {
-                Console.WriteLine($"Country: {item.Key}, Capital: {item.Value}"); 
-
-                
-            }
-            
+            mazda.ShowPassport();
             Console.ReadKey();
 
 
@@ -119,4 +30,49 @@ namespace CSLight
 
 
     }
+
+    class Car
+    {
+        public string Name;
+        public int Age;
+        public int Hp;
+        public float MaxSpeed;
+
+        public Car(string name, int age, int hp, float maxSpeed) //constructorCar()
+        {
+            if (hp <= 0)
+            {
+                Hp = 1;
+            }
+            else
+            {
+                Hp = hp;
+            }
+
+            Name = name;
+            Age = age;
+            MaxSpeed = maxSpeed;
+        }
+
+        public Car() 
+        {
+            Name = "";
+            Age = 1990;
+            Hp = 500;
+            MaxSpeed = 250.0f;
+        }
+        public void ShowPassport() //method
+        {
+            Console.WriteLine($"Name: {Name}\nAge: {Age}\nHP: {Hp}\nMaxSpeed: {MaxSpeed} km/h");
+        }
+
+        public void BecomeOlder(int years, int decreaseHp) //method
+        {
+            Age += years;
+            Hp -= decreaseHp;
+        }
+
+    }
+
+
 }
