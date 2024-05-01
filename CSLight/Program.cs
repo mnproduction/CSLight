@@ -10,60 +10,77 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            Renderer renderer = new Renderer();
-            Player player = new Player(55, 10);
-            renderer.Draw(player.X, player.Y);
-
-            while (true)
-            {
-                
-                switch (Console.ReadKey(true).Key)
+            Fighter[] fighters =
                 {
-                    case ConsoleKey.UpArrow:
-                        player.Y--;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        player.Y++;
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        player.X--;
-                        break;
-                    case ConsoleKey.RightArrow:
-                        player.X++;
-                        break;
-                }
-                renderer.Draw(player.X, player.Y);
+                    new Fighter("Gladiator", 500, 20, 20),
+                    new Fighter("Barbarian", 520, 25, 15),
+                    new Fighter("Archer", 300, 50, 5),
+                    new Fighter("Wizard", 250, 80, 0)
+                };
+
+            int fighterIndex;
+
+            foreach (Fighter f in fighters)
+            {
+                f.ShowInfo();
             }
+
+            Console.WriteLine("\n||" + new string('-', 35) + "||");
+            Console.WriteLine("\tChoose fighter 1: ");
+            fighterIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+
+            Fighter firstFighter = fighters[fighterIndex];
+
+            Console.WriteLine("\tChoose fighter 2: ");
+            fighterIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+
+            Fighter secondFighter = fighters[fighterIndex];
+            Console.WriteLine("\n||" + new string('-', 35) + "||");
+
+            while (firstFighter.Health > 0 && secondFighter.Health > 0)
+            {
+                firstFighter.TakeDamage(secondFighter.Damage);
+                secondFighter.TakeDamage(firstFighter.Damage);
+                firstFighter.ShowCurHealth();
+                secondFighter.ShowCurHealth();
+            }
+
 
 
             Console.ReadKey();
         }
     }
 
-    class Player
+    class Fighter
     {
-        private int _x;
-        private int _y;
-
-        public int X { get => _x; set => _x = value; }
-        public int Y { get => _y; set => _y = value; }
-
-        public Player(int x, int y)
+        private string _name;
+        private int _health;
+        private int _damage;
+        private int _armor;
+    
+        public Fighter(string name, int health, int damage, int armor)
         {
-            _x = x;
-            _y = y;
+            _name = name;
+            _health = health;
+            _damage = damage;
+            _armor = armor;
         }
+
+        public int Health { get { return _health; } }
+
+        public int Damage { get { return _damage; } }
+
+        public void ShowInfo()
+        {
+            Console.WriteLine($"Name: {_name}, Health: {_health}, Damage: {_damage}, Armor: {_armor}");
+        }
+
+        public void ShowCurHealth()
+        { Console.WriteLine($"{_name} has {_health} health left."); }
+
+        public void TakeDamage(int damage)
+        { _health -= (damage - _armor); }
     }
 
-    class Renderer
-    {
-        public void Draw(int x, int y, char character = '@')
-        {
-            Console.CursorVisible = false;
-            Console.SetCursorPosition(x, y);
-            Console.Write(character);
 
-        }
-
-    } 
 }
