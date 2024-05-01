@@ -10,68 +10,60 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            Knight knight1 = new Knight("Sedric", 100, 10, 10);
-            Barbarian barbarian1 = new Barbarian("Durak", 100, 10, 10, 2);
+            Renderer renderer = new Renderer();
+            Player player = new Player(55, 10);
+            renderer.Draw(player.X, player.Y);
 
-            knight1.TakeDamage(50);
-            barbarian1.TakeDamage(50);
+            while (true)
+            {
+                
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        player.Y--;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        player.Y++;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        player.X--;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        player.X++;
+                        break;
+                }
+                renderer.Draw(player.X, player.Y);
+            }
 
-            knight1.ShowStatus();
-            barbarian1.ShowStatus();
 
             Console.ReadKey();
         }
     }
 
-    class Warrior
+    class Player
     {
-        protected string Name;
-        protected int Health;
-        protected int Armor;
-        protected int Damage;
+        private int _x;
+        private int _y;
 
-        public Warrior(string name, int health, int armor, int damage)
+        public int X { get => _x; set => _x = value; }
+        public int Y { get => _y; set => _y = value; }
+
+        public Player(int x, int y)
         {
-            Name = name; 
-            Health = health;
-            Armor = armor;
-            Damage = damage;
-        }
-
-        public void TakeDamage(int damage)
-        {
-            Health -= damage - Armor;
-        }
-
-        public void ShowStatus()
-        {
-            Console.WriteLine($"Name: {Name}, Health: {Health}, Armor: {Armor}, Damage: {Damage}");
-        }
-
-    }
-
-    class Knight : Warrior
-    {
-        public Knight(string name, int health, int armor, int damage) : base(name, health, armor, damage) { }
-
-        public void Pray()
-        {
-            Armor += 3;
-            Health += 1;
-        }
-
-    }
-
-    class Barbarian : Warrior
-    {
-        public Barbarian(string name, int health, int armor, int damage, int attackSpeed) : base(name, health, armor, damage * attackSpeed) { }
-
-        public void Shout()
-        {
-            Armor -= 2;
-            Damage += 1;
+            _x = x;
+            _y = y;
         }
     }
 
+    class Renderer
+    {
+        public void Draw(int x, int y, char character = '@')
+        {
+            Console.CursorVisible = false;
+            Console.SetCursorPosition(x, y);
+            Console.Write(character);
 
+        }
+
+    } 
 }
