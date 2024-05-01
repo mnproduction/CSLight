@@ -10,17 +10,53 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
+            bool isOpen = true;
             
-            Car ferrary = new Car("F40", 30, 471, 317.0f);
+            Table[] tables = {new Table(1, 4), new Table(2, 8), new Table(3, 10)};
 
-            Car mazda = new Car();
+            while (isOpen)
+            {
+                foreach (Table table in tables)
+                {
+                    table.ShowPlaces();
+                }
+                Console.WriteLine("\n1. Reserve places\n2. Cancel reservation\n3. Exit");
+                int choice = int.TryParse(Console.ReadLine(), out int choiceParse) ? choiceParse : 0;
 
-            ferrary.ShowPassport();
-            ferrary.BecomeOlder(1, 10);
-            ferrary.ShowPassport();
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Which table do you want to take a place at?");
+                        int tableReservation = Convert.ToInt32(Console.ReadLine()) - 1;
+                        Console.WriteLine("How many places do you want to take?");
+                        int numPlacesReserve = Convert.ToInt32(Console.ReadLine());
+                        tables[tableReservation].TakePlace(tableReservation, numPlacesReserve);
+                        continue;
+                    case 2:
+                        Console.WriteLine("Which table do you want to cancel a reservation at?");
+                        int tableCancel = Convert.ToInt32(Console.ReadLine()) - 1;
+                        Console.WriteLine("How many places do you want to cancel?");
+                        int numPlacesCancel = Convert.ToInt32(Console.ReadLine());
+                        tables[tableCancel].TakePlace(tableCancel, numPlacesCancel);
+                        continue;
+                    case 3:
+                        isOpen = false;
+                        continue;
+                    default:
+                        continue;
+
+                Console.ReadKey();
+                Console.Clear();
+                }
 
 
-            mazda.ShowPassport();
+            }
+
+
+
+
+
             Console.ReadKey();
 
 
@@ -31,47 +67,40 @@ namespace CSLight
 
     }
 
-    class Car
+    class Table
     {
-        public string Name;
-        public int Age;
-        public int Hp;
-        public float MaxSpeed;
+        public int Id;
+        public int MaxPlaces;
+        public int FreePlaces;
 
-        public Car(string name, int age, int hp, float maxSpeed) //constructorCar()
+        public Table(int id, int maxPlaces)
         {
-            if (hp <= 0)
+            Id = id;
+            MaxPlaces = maxPlaces;
+            FreePlaces = maxPlaces;
+        }
+
+        public void ShowPlaces()
+        {
+            Console.WriteLine($"Table {Id} has {FreePlaces} of {MaxPlaces} places");
+        }
+
+        public void TakePlace(int tableId, int numPlaces)
+        {
+            if (numPlaces <= this.FreePlaces)
             {
-                Hp = 1;
+                this.FreePlaces -= numPlaces;
+                Console.WriteLine($"You have taken {numPlaces} place/s at table #{tableId}\nIt now has {this.FreePlaces} of {this.MaxPlaces} places");
             }
-            else
-            {
-                Hp = hp;
+            else if (numPlaces > this.FreePlaces) 
+            { 
+                Console.WriteLine($"You can't take {numPlaces} place/s at table #{tableId}, as there are only {this.FreePlaces} places left"); 
             }
-
-            Name = name;
-            Age = age;
-            MaxSpeed = maxSpeed;
+            else 
+            { 
+                Console.WriteLine($"Table {tableId} is full"); 
+            }
         }
-
-        public Car() 
-        {
-            Name = "";
-            Age = 1990;
-            Hp = 500;
-            MaxSpeed = 250.0f;
-        }
-        public void ShowPassport() //method
-        {
-            Console.WriteLine($"Name: {Name}\nAge: {Age}\nHP: {Hp}\nMaxSpeed: {MaxSpeed} km/h");
-        }
-
-        public void BecomeOlder(int years, int decreaseHp) //method
-        {
-            Age += years;
-            Hp -= decreaseHp;
-        }
-
     }
 
 
