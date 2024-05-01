@@ -10,59 +10,66 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            Performer worker1 = new Performer("John");
-            Performer worker2 = new Performer("Jane");
+            Knight knight1 = new Knight("Sedric", 100, 10, 10);
+            Barbarian barbarian1 = new Barbarian("Durak", 100, 10, 10, 2);
 
-            Task[] tasks = { new Task(worker1, "Dig a hole"), new Task(worker2, "Throw ground away") };
+            knight1.TakeDamage(50);
+            barbarian1.TakeDamage(50);
 
-            Board schedule = new Board(tasks); 
-
-            schedule.ShowTasks();
-
+            knight1.ShowStatus();
+            barbarian1.ShowStatus();
 
             Console.ReadKey();
         }
     }
 
-    class Performer
+    class Warrior
     {
-        public string Name;
-        
-        public Performer(string name) { Name = name; }
+        protected string Name;
+        protected int Health;
+        protected int Armor;
+        protected int Damage;
+
+        public Warrior(string name, int health, int armor, int damage)
+        {
+            Name = name; 
+            Health = health;
+            Armor = armor;
+            Damage = damage;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            Health -= damage - Armor;
+        }
+
+        public void ShowStatus()
+        {
+            Console.WriteLine($"Name: {Name}, Health: {Health}, Armor: {Armor}, Damage: {Damage}");
+        }
+
     }
 
-    class Board
+    class Knight : Warrior
     {
-        public Task[] Tasks;
+        public Knight(string name, int health, int armor, int damage) : base(name, health, armor, damage) { }
 
-        public Board(Task[] tasks) 
-        { 
-            Tasks = tasks; 
-        }
-
-        public void ShowTasks()
+        public void Pray()
         {
-            foreach (var task in Tasks)
-            {
-                task.ShowInfo();
-            }
+            Armor += 3;
+            Health += 1;
         }
+
     }
 
-    class Task
+    class Barbarian : Warrior
     {
-        public Performer Worker;
-        public string Description;
+        public Barbarian(string name, int health, int armor, int damage, int attackSpeed) : base(name, health, armor, damage * attackSpeed) { }
 
-        public Task(Performer worker, string description)
+        public void Shout()
         {
-            Worker = worker;
-            Description = description;
-        }
-
-        public void ShowInfo()
-        {
-            Console.WriteLine($"Description: {Description}\nResponsable:{Worker.Name}");
+            Armor -= 2;
+            Damage += 1;
         }
     }
 
