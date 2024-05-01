@@ -10,43 +10,44 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-
-            NPC[] characters = { new NPC(), new Farmer(), new Knight(), new Child() };
-
-            foreach (var character in characters)
+            Behavior[] behaviors =
             {
-                character.ShowInfo();
-                Console.WriteLine("--------------------");
+                new Walker(),
+                new Jumper()
+            };
+            
+            while (true) 
+            {
+                foreach (Behavior behavior in behaviors)
+                {
+                    behavior.Update(); 
+                    System.Threading.Thread.Sleep(1000); // 1 second
+                }
             }
+        
             Console.ReadKey();
+        
+        
         }
     }
 
-    class NPC
+    class Behavior
     {
-        public virtual void ShowInfo()
-        { Console.WriteLine("Just NPC"); }
-    }
-
-    class Farmer : NPC
-    {
-        public override void ShowInfo()
-        {
-            base.ShowInfo();
-            Console.WriteLine("And I am a farmer");
+        public virtual void Update()
+        { 
+        
         }
     }
-
-    class Knight : NPC
+    class Walker : Behavior
     {
-        public override void ShowInfo()
-        {
-            Console.WriteLine("I am a knight");
-        }
+        public override void Update() { Console.WriteLine("Walking"); }
     }
 
-    class Child : NPC
-    {
-
+    class Jumper : Behavior 
+    { 
+        public override void Update() { Console.WriteLine("Jumping"); }
     }
+
+
+
 }
