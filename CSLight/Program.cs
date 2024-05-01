@@ -10,20 +10,7 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            Behavior[] behaviors =
-            {
-                new Walker(),
-                new Jumper()
-            };
             
-            while (true) 
-            {
-                foreach (Behavior behavior in behaviors)
-                {
-                    behavior.Update(); 
-                    System.Threading.Thread.Sleep(1000); // 1 second
-                }
-            }
         
             Console.ReadKey();
         
@@ -31,23 +18,44 @@ namespace CSLight
         }
     }
 
-    class Behavior
+    interface Movable
     {
-        public virtual void Update()
-        { 
-        
+        void Move();
+        void ShowMovementSpeed();
+    }
+
+    interface Burnable
+    {
+        void Burn();
+    }
+
+    class Vehicle
+    {
+
+
+    }
+
+
+
+    class Car : Vehicle, Movable, Burnable
+    {
+        public void Move()
+        {
+
         }
+
+        public void ShowMovementSpeed() { }
+
+        public void Burn() { }
     }
-    class Walker : Behavior
+
+    class Human: Movable
     {
-        public override void Update() { Console.WriteLine("Walking"); }
+        public void Move()
+        {
+
+        }
+        public void ShowMovementSpeed() { }
     }
-
-    class Jumper : Behavior 
-    { 
-        public override void Update() { Console.WriteLine("Jumping"); }
-    }
-
-
 
 }
