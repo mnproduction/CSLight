@@ -10,42 +10,34 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
+            User.Identifications = 10;
+            User user1 = new User();
+            User user2 = new User();
+            user1.ShowInfo();
+            user2.ShowInfo();
 
-            Vehicle[] vehicles =
-            {
-                new Car(),
-                new Train()
-            };
 
-            foreach (var veh in vehicles)
-            {
-                veh.Move();
-            }
+
 
             Console.ReadKey();
-        
-        
         }
     }
 
-    abstract class Vehicle
+    class User
     {
-        protected float Speed;
+        public static int Identifications;
+        public int Identification;
 
-        public abstract void Move();
+        public User() 
+        { 
+            Identification = ++Identifications;
+        }
 
-        public float GetSpeed()
-        { return Speed; }
 
+        public void ShowInfo()
+        { 
+            Console.WriteLine("Identification: " + Identification);
+        }
     }
-
-    class Car : Vehicle
-    {
-        public override void Move() { Console.WriteLine("Car is moving at highway"); }
-    }
-
-    class Train : Vehicle
-    {
-        public override void Move() { Console.WriteLine("Train is moving at railway"); } 
-    }
+    
 }
