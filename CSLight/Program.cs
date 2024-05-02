@@ -10,12 +10,9 @@ namespace CSLight
     {
         static void Main(string[] args)
         {
-            User.Identifications = 10;
-            User user1 = new User();
-            User user2 = new User();
-            user1.ShowInfo();
-            user2.ShowInfo();
-
+            Console.WriteLine("Hello World!");
+            MyClass instance = new MyClass();
+            Console.WriteLine(MyClass.StaticField);
 
 
 
@@ -23,21 +20,21 @@ namespace CSLight
         }
     }
 
-    class User
+    class MyClass
     {
-        public static int Identifications;
-        public int Identification;
+        public static float StaticField;
 
-        public User() 
-        { 
-            Identification = ++Identifications;
+        static MyClass()
+        {
+            StaticField = 100;
+            Console.WriteLine("Static Constructor");
         }
 
-
-        public void ShowInfo()
-        { 
-            Console.WriteLine("Identification: " + Identification);
+        public MyClass()
+        {
+            Console.WriteLine("Simple Constructor");
         }
+
     }
     
 }
